@@ -11,8 +11,7 @@ const MangaSchema = Schema({
         required: [ true, 'El autor es un campo obligatorio' ],
     },
     portada: {
-        type: String,
-        required: [ true, 'La portada es un campo obligatorio' ],
+        type: String
     },
     estado: {
         type: Boolean,

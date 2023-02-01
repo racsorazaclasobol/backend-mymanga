@@ -74,6 +74,7 @@ const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
         
         const mangaUpdated = await Manga.findByIdAndUpdate( id, { portada: secure_url }, { new: true } );
 
+        console.log( mangaUpdated )
         res.json({ msg: "El chapter fue subido exitosamente." })
 
         

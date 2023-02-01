@@ -49,6 +49,8 @@ const crearManga = async( req = request, res = response ) => {
 
         await manga.save();
 
+        console.log(manga)
+
         res.json( manga );
 
     } catch (error) {
