@@ -1,0 +1,117 @@
+[
+    {
+        "TEMPLATE_NAME": "Agregar Capítulo",
+        "TEMPLATE":[
+            {
+                "titulo": "Los 6 Vegapunk",
+                "capitulo": 1065,
+                "paginas": [
+                    {
+                        "pagina": 1,
+                        "tipo": "A",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530237/MyManga/OnePiece/Capitulos/vne6dmk2sqy2dlpnpivp.png"
+                    },
+                    {
+                        "pagina": 1,
+                        "tipo": "P",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530238/MyManga/OnePiece/Capitulos/r7s3zkuwhj2e7k0vlit1.png"
+                    },
+                    {
+                        "pagina": 2,
+                        "tipo": "P",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530238/MyManga/OnePiece/Capitulos/srokca1wqjk9d9huesis.png"
+                    },
+                    {
+                        "pagina": 1,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530239/MyManga/OnePiece/Capitulos/toq28wdxzis0nxkmvcry.png"
+                    },
+                    {
+                        "pagina": 2,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530240/MyManga/OnePiece/Capitulos/gduh8zlgcx8hy59wej59.png"
+                    },
+                    {
+                        "pagina": 3,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530240/MyManga/OnePiece/Capitulos/g6uwiwytvtgtgu786rj1.png"
+                    },
+                    {
+                        "pagina": 4,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530241/MyManga/OnePiece/Capitulos/g8at5dpqpvnj0mt0xnck.png"
+                    },
+                    {
+                        "pagina": 5,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530242/MyManga/OnePiece/Capitulos/sg6mb9gqxqvngbwi09tq.png"
+                    },
+                    {
+                        "pagina": 6,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530243/MyManga/OnePiece/Capitulos/tjbrndwc1ghia0vrzvyg.png"
+                    },
+                    {
+                        "pagina": 7,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530244/MyManga/OnePiece/Capitulos/jbo6rqheorw4ezf9en8o.png"
+                    },
+                    {
+                        "pagina": 8,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530245/MyManga/OnePiece/Capitulos/gn8dikyzvvuvuerx9hgn.png"
+                    },
+                    {
+                        "pagina": 9,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530246/MyManga/OnePiece/Capitulos/wlmaigam21d59rgqfcg7.png"
+                    },
+                    {
+                        "pagina": 10,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530247/MyManga/OnePiece/Capitulos/w2mrbamrlzve1jykouaq.png"
+                    },
+                    {
+                        "pagina": 11,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530247/MyManga/OnePiece/Capitulos/wwxdqn8gu4fl4irzjyrf.png"
+                    },
+                    {
+                        "pagina": 12,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530248/MyManga/OnePiece/Capitulos/m2hr6cozvl34hmbwwqnh.png"
+                    },
+                    {
+                        "pagina": 13,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530250/MyManga/OnePiece/Capitulos/hxioddlpm9jc2hvnsray.png"
+                    },
+                    {
+                        "pagina": 14,
+                        "tipo": "C",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530251/MyManga/OnePiece/Capitulos/v95xg4mxgbjzi1dzfoy2.png"
+                    },
+                    {
+                        "pagina": 1,
+                        "tipo": "E",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530252/MyManga/OnePiece/Capitulos/zporarqwfguwysxuxrah.png"
+                    },
+                    {
+                        "pagina": 2,
+                        "tipo": "E",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530252/MyManga/OnePiece/Capitulos/cacarezkem3reuj4erup.png"
+                    },
+                    {
+                        "pagina": 3,
+                        "tipo": "E",
+                        "url": "https://res.cloudinary.com/dmuswnvaf/image/upload/v1670530253/MyManga/OnePiece/Capitulos/mgfjqddrxixrh5bfxnsy.png"
+                    }
+                ],
+                "manga": "63ceb9942f17916d53f5f9af"
+            }        
+        ]
+    },
+    {
+        
+    }
+]
