@@ -68,13 +68,24 @@ const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
         if ( !manga ) return res.status(400).json({ msg: `No existe un manga con la id: ${ id }` });
         
         const mangaFolder = manga.nombre.replaceAll( ' ', '' ).toLowerCase();
+
+        if( manga.portada ){ //Borrar imagen previa de Cloudinary
+
+            const nombreArr = manga.portada.split( '/' );
+            const nombre = nombreArr[ nombreArr.length - 1 ];
+            const [ name_id ] = nombre.split('.');
+
+            const public_id = `MyManga/${ mangaFolder }/portada/${ name_id }`
+
+            await cloudinary.uploader.destroy( public_id );
+
+        }
                 
         const { tempFilePath } = portadaToUpload;
         const { secure_url } = await cloudinary.uploader.upload( tempFilePath, { public_id: `MyManga/${ mangaFolder }/portada/${ uuidv4() }` } );
         
         const mangaUpdated = await Manga.findByIdAndUpdate( id, { portada: secure_url }, { new: true } );
 
-        console.log( mangaUpdated )
         res.json({ msg: "El chapter fue subido exitosamente." })
 
         
