@@ -65,7 +65,7 @@ const obtenerListaCapitulos = async( req = request, res = response ) => {
 
         const { manga } = req.params;
 
-        const chapters = await Chapter.find({ manga }).select('capitulo').sort({ capitulo: 1 });
+        const chapters = await Chapter.find({ manga }).select('capitulo').select('titulo').sort({ capitulo: 1 });
         
         if( !chapters ) return res.status(400).json({ msg: 'No se han encontrado capítulos en la Base de Datos' });
         
