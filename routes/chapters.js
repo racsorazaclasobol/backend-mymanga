@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { crearChapter, eliminarChapter, modificarChapter, obtenerChapterId, obtenerChapters, obtenerChaptersManga, obtenerLastChaptersManga, obtenerListaCapitulos } from '../controllers/chapters.js';
+import { crearChapter, eliminarChapter, modificarChapter, obtenerChapterId, obtenerChapters, obtenerChaptersManga, obtenerLastChaptersManga, obtenerListaCapitulos, obtenerTitleLastChaptersManga } from '../controllers/chapters.js';
 
 const router = Router();
 
@@ -8,6 +8,7 @@ const router = Router();
 router.get( '/', obtenerChapters);
 router.get( '/:manga', obtenerChaptersManga);
 router.get( '/last/:manga', obtenerLastChaptersManga);
+router.get( '/titleLast/:manga', obtenerTitleLastChaptersManga);
 router.get( '/list/:manga', obtenerListaCapitulos);
 router.get( '/byid/:id', obtenerChapterId);
 router.post( '/', crearChapter);

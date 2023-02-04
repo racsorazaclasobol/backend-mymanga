@@ -59,6 +59,27 @@ const obtenerLastChaptersManga = async( req = request, res = response ) => {
 
 }
 
+const obtenerTitleLastChaptersManga = async( req = request, res = response ) => {
+
+    try {
+
+        const { manga } = req.params;
+
+        const chapters = await Chapter.find({ manga }).sort({ capitulo: 1 }).select( 'titulo' ).select( 'capitulo' );
+        
+        if( !chapters ) return res.status(400).json({ msg: 'No se han encontrado capítulos en la Base de Datos' });
+        
+        const lastChapter = chapters[ chapters.length -1 ];
+        
+        res.json( lastChapter );
+        
+    } catch (error) {
+        console.log( error );
+        res.status(500).json({ msg: 'Ha ocurrido un error, inténtelo más tarde.' });
+    }
+
+}
+
 const obtenerListaCapitulos = async( req = request, res = response ) => {
 
     try {
@@ -187,4 +208,5 @@ export {
     obtenerChaptersManga,
     obtenerLastChaptersManga,
     obtenerListaCapitulos,
+    obtenerTitleLastChaptersManga,
 }
