@@ -6,6 +6,7 @@ import UsuariosRouter   from '../routes/usuarios.js';
 import MangasRouter     from '../routes/mangas.js';
 import ChaptersRouter   from '../routes/chapters.js';
 import UploadsRouter    from '../routes/upload.js';
+import AuthRouter       from '../routes/auth.js'
 import dbConnection     from '../database/config.js';
 
 class Server {
@@ -17,9 +18,13 @@ class Server {
         this.conectarDB();
 
         this.rutasPath = {
+            //Usuarios y Authentication
+            authPath: '/api/auth',
             usuariosPath: '/api/usuarios',
-            mangasPath: '/api/mangas',
+
+            //Manga y Chapters
             chaptersPath: '/api/chapters',
+            mangasPath: '/api/mangas',
             uploadPath: '/api/uploads',
         }
 
@@ -46,12 +51,16 @@ class Server {
 
     routes(){
 
-        const { usuariosPath, mangasPath, chaptersPath, uploadPath } = this.rutasPath;
+        const { usuariosPath, authPath, mangasPath, chaptersPath, uploadPath } = this.rutasPath;
 
+        //Usuarios y Authentication
         this.app.use( usuariosPath, UsuariosRouter );
-        this.app.use( mangasPath, MangasRouter );
+        this.app.use( authPath,     AuthRouter );
+
+        //Mangas y Chapters
+        this.app.use( mangasPath,   MangasRouter );
         this.app.use( chaptersPath, ChaptersRouter );
-        this.app.use( uploadPath, UploadsRouter );
+        this.app.use( uploadPath,   UploadsRouter );
 
     }
 
