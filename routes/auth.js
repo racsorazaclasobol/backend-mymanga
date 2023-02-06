@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { authLogin } from '../controllers/auth.js';
+import { authLogin, revalidarToken } from '../controllers/auth.js';
+import { validarJWT } from '../middlewares/validar-jwt.js'
+
 
 const router = Router();
 
 //TODO: Validaciones
-router.get( '/login', authLogin);
+router.post( '/login', authLogin);
 
-
-
+router.get( '/renew', validarJWT, revalidarToken );
 
 
 
