@@ -1,7 +1,8 @@
 import { request, response } from 'express';
 import jwt from 'jsonwebtoken';
+import Usuario from '../models/usuario.js';
 
-const validarJWT = ( req = request, res = response, next ) => {
+const validarJWT = async( req = request, res = response, next ) => {
 
     const token = req.header('x-token');
 
@@ -9,24 +10,21 @@ const validarJWT = ( req = request, res = response, next ) => {
 
     try {
 
-        const { uid, nombre } = jwt.verify(
-            token,
-            process.env.SECRETPRIVATEKEY,
-        );
+        const { uid } = jwt.verify( token, process.env.SECRETPRIVATEKEY );
 
-        req.uid = uid;
-        req.nombre = nombre;
+        const usuario = await Usuario.findById( uid );
+
+        if( !usuario ) return res.status(401).json({ msg: 'Token no válido - Usuario no existe.' });
+        if( !usuario.estado ) return res.status(401).json({ msg: 'Token no válido - Usuario deshabilitado.' });
+
+        req.usuario = usuario;
+        
+        next();
         
     } catch (error) {
         console.log(error)
-        return res.status(401).json({
-            ok: false,
-            msg: 'Token no válido.'
-        })            
+        return res.status(401).json({ msg: 'Token no válido.' })            
     }
-
-    next();
-
 }
 
 export {
