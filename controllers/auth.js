@@ -11,14 +11,14 @@ const authLogin = async( req = request, res = response ) => {
         const { correo, password } = req.body;
         
         const usuario = await Usuario.findOne({ correo });
-        
+
         if( !usuario ) return res.status(400).json({ msg: 'Usuario no existe.' })
         
         const validPassword = bcryptjs.compareSync( password, usuario.password );
-
+        
         if( !validPassword ) return res.status(400).json({ msg: 'Usuario y/o password son incorrectos.' })
-
-        const token = await generarJWT( usuario._id, usuario.nombre );
+        
+        const token = await generarJWT( usuario._id );
 
         res.json({
             usuario,
@@ -33,11 +33,12 @@ const authLogin = async( req = request, res = response ) => {
 
 const revalidarToken = async( req = request, res = response ) => {
 
-    const { uid, nombre } = req;
+    const { usuario } = req;
+    const { _id } = usuario;
 
-    const token = await generarJWT( uid, nombre );
+    const token = await generarJWT( _id );
 
-    res.json({ uid, nombre, token })
+    res.json({ usuario, token })
 
 }
 
