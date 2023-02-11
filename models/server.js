@@ -44,11 +44,6 @@ class Server {
         //Directorío público
         this.app.use( express.static('public') );
 
-        // *
-        this.app.get( '*', (req, res) => {
-            res.sendFile('https://mimanga.vercel.app');
-        } )
-
         //Manejo en la carga de archivos
         this.app.use( fileUpload({ useTempFiles: true, tempFileDir: '/tmp/', createParentPath: true }) );
         
