@@ -6,11 +6,13 @@ const validarJWT = async( req = request, res = response, next ) => {
 
     const token = req.header('x-token');
 
-    if ( !token ) return res.status(401).json({ msg: 'Token no válido.' });
+    if ( !token ) return res.status(401).json({ msg: 'Token no existe.' });
 
     try {
 
         const { uid } = jwt.verify( token, process.env.SECRETPRIVATEKEY );
+
+        if( !uid ) return res.status(401).json({ msg: 'Token no existe.' }); 
 
         const usuario = await Usuario.findById( uid );
 
@@ -23,7 +25,7 @@ const validarJWT = async( req = request, res = response, next ) => {
         
     } catch (error) {
         console.log(error)
-        return res.status(401).json({ msg: 'Token no válido.' })            
+        return res.status(500).json({ msg: 'Token no válido.' })            
     }
 }
 
