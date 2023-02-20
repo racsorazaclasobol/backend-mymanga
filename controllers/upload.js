@@ -2,6 +2,7 @@ import { request, response } from "express";
 import { v2 as cloudinary } from 'cloudinary'
 import { v4 as uuidv4 } from 'uuid'
 
+import tinify from '../helpers/tiny-config.js'
 import Chapter from "../models/Chapter.js";
 import Manga from "../models/Manga.js";
 
@@ -15,13 +16,14 @@ cloudinary.config( {
 const subirImagenesCloudinary = async ( req = request, res = response ) => {
 
     try { 
+
+        console.log(" Inicio subirImagenesCloudinary ")
+
         
         const { id }            = req.params;
         const paginasToUpload   = req.files.archivo;
         
         const chapter = await Chapter.findById( id ).populate( 'manga', 'nombre' );
-
-        console.log( chapter );
         
         if ( !chapter ) return res.status(400).json({ msg: `No existe un chapter con la id: ${ id }` });
         
@@ -46,8 +48,9 @@ const subirImagenesCloudinary = async ( req = request, res = response ) => {
         
         const chapterUpdated = await Chapter.findByIdAndUpdate( id, { paginas }, { new: true } );
 
-        res.json({ msg: "El chapter fue subido exitosamente." })
+        res.json({ msg: "El chapter fue subido exitosamente." });
 
+        console.log(" Fin subirImagenesCloudinary ")
         
     } catch (error) {
         console.log(error);
@@ -59,9 +62,16 @@ const subirImagenesCloudinary = async ( req = request, res = response ) => {
 const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
 
     try { 
+
+        console.log(" Inicio subirPortadaMangaCloudinary ")
         
         const { id }            = req.params;
         const portadaToUpload   = req.files.archivo;
+        
+        const source = tinify.fromFile( portadaToUpload.tempFilePath );
+        const converted = source.convert({ type: "image/webp" });
+        const extension = await converted.result().extension();
+        await converted.toFile("panda-sticker." + extension);
         
         const manga = await Manga.findById( id );
         
@@ -88,6 +98,7 @@ const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
 
         res.json({ msg: "El chapter fue subido exitosamente." })
 
+    console.log(" Fin subirPortadaMangaCloudinary ")
         
     } catch (error) {
         console.log(error);

@@ -122,6 +122,8 @@ const obtenerChapterId = async( req = request, res = response ) => {
 const crearChapter = async( req = request, res = response ) => {
 
     try {
+
+        console.log(" Inicio crearChapter ");
         
         const chapterData = req.body;
         
@@ -130,6 +132,8 @@ const crearChapter = async( req = request, res = response ) => {
         await chapter.save();
 
         res.json( chapter );
+
+        console.log(" Fin crearChapter ");
 
     } catch (error) {
         console.log(error);
