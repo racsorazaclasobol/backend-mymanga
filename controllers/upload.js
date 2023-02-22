@@ -2,9 +2,10 @@ import { request, response } from "express";
 import { v2 as cloudinary } from 'cloudinary'
 import { v4 as uuidv4 } from 'uuid'
 
-import tinify from '../helpers/tiny-config.js'
+import { convertAndCompressImage } from '../helpers/tiny-config.js'
 import Chapter from "../models/Chapter.js";
 import Manga from "../models/Manga.js";
+import { eliminarArchivo } from "../helpers/manage-files.js";
 
 cloudinary.config( { 
     cloud_name: 'dmuswnvaf', 
@@ -17,7 +18,7 @@ const subirImagenesCloudinary = async ( req = request, res = response ) => {
 
     try { 
 
-        console.log(" Inicio subirImagenesCloudinary ")
+        console.log("Inicio subirImagenesCloudinary ")
 
         
         const { id }            = req.params;
@@ -35,22 +36,28 @@ const subirImagenesCloudinary = async ( req = request, res = response ) => {
         for ( const pagina of paginasToUpload ) {
             const paginaToSave = {};
             const { tempFilePath, name } = pagina;
-            const { secure_url: url } = await cloudinary.uploader.upload( tempFilePath, { public_id: `MyManga/${ mangaFolder }/capitulos/${ chapterFolder }/${ uuidv4() }` } );
+
+            const newTempFilePath = await convertAndCompressImage( pagina );
+
+            const { secure_url: url } = await cloudinary.uploader.upload( newTempFilePath, { public_id: `MyManga/${ mangaFolder }/capitulos/${ chapterFolder }/${ uuidv4() }` } );
             
-            const paginaSinExtencion = name.replace('.webp', '');
+            const fileExtension = name.slice( ( name.lastIndexOf('.') - 1 >>> 0 ) + 2 );
+            const paginaSinExtencion = name.replace(`.${ fileExtension }`, '');
             
             paginaToSave.url = url;
             paginaToSave.tipo = name.charAt(0);
             paginaToSave.pagina = paginaSinExtencion.replace(paginaToSave.tipo, '');
             
             paginas.push( paginaToSave )
+
+            eliminarArchivo( newTempFilePath );        
         }
         
         const chapterUpdated = await Chapter.findByIdAndUpdate( id, { paginas }, { new: true } );
 
         res.json({ msg: "El chapter fue subido exitosamente." });
 
-        console.log(" Fin subirImagenesCloudinary ")
+        console.log("Fin subirImagenesCloudinary ")
         
     } catch (error) {
         console.log(error);
@@ -63,15 +70,10 @@ const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
 
     try { 
 
-        console.log(" Inicio subirPortadaMangaCloudinary ")
+        console.log("Inicio subirPortadaMangaCloudinary ")
         
         const { id }            = req.params;
         const portadaToUpload   = req.files.archivo;
-        
-        const source = tinify.fromFile( portadaToUpload.tempFilePath );
-        const converted = source.convert({ type: "image/webp" });
-        const extension = await converted.result().extension();
-        await converted.toFile("panda-sticker." + extension);
         
         const manga = await Manga.findById( id );
         
@@ -92,13 +94,18 @@ const subirPortadaMangaCloudinary = async ( req = request, res = response ) => {
         }
                 
         const { tempFilePath } = portadaToUpload;
-        const { secure_url } = await cloudinary.uploader.upload( tempFilePath, { public_id: `MyManga/${ mangaFolder }/portada/${ uuidv4() }` } );
+
+        const newTempFilePath = await convertAndCompressImage( portadaToUpload );
+
+        const { secure_url } = await cloudinary.uploader.upload( newTempFilePath, { public_id: `MyManga/${ mangaFolder }/portada/${ uuidv4() }` } );
         
         const mangaUpdated = await Manga.findByIdAndUpdate( id, { portada: secure_url }, { new: true } );
 
+        eliminarArchivo( newTempFilePath );        
+
         res.json({ msg: "El chapter fue subido exitosamente." })
 
-    console.log(" Fin subirPortadaMangaCloudinary ")
+    console.log("Fin subirPortadaMangaCloudinary ")
         
     } catch (error) {
         console.log(error);
