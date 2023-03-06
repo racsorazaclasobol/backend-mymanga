@@ -23,6 +23,9 @@ const ChapterSchema = Schema({
         type: Boolean,
         default: true
     },
+    fechaPublicacion: {
+        type: Date
+    },
     manga: {
         type: Schema.Types.ObjectId,
         ref: 'Manga',

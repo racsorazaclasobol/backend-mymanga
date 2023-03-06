@@ -65,7 +65,7 @@ const obtenerTitleLastChaptersManga = async( req = request, res = response ) => 
 
         const { manga } = req.params;
 
-        const chapters = await Chapter.find({ manga }).sort({ capitulo: 1 }).select( 'titulo' ).select( 'capitulo' );
+        const chapters = await Chapter.find({ manga }).sort({ capitulo: 1 }).select( 'titulo' ).select( 'capitulo' ).select( 'fechaPublicacion' );
         
         if( !chapters ) return res.status(400).json({ msg: 'No se han encontrado capítulos en la Base de Datos' });
         
